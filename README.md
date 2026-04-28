@@ -1,18 +1,29 @@
 # 📸 Hazel Photographie
 
-Bienvenue sur le dépôt du projet Hazel Photographie. Cette application permet de gérer les prestations et la galerie d'un studio photo de manière dynamique.
+Bienvenue sur le dépôt de **Hazel Photographie**, un projet de site web moderne dédié à la photographie professionnelle.
 
-## Architecture du projet
-Le projet est séparé en deux parties principales :
-- **/backend** : API construite avec Node.js et Express, utilisant une architecture **MVC**.
-- **/frontend** : Interface utilisateur développée avec React et Tailwind CSS v4.
+## 🚀 Présentation du Projet
+Ce projet est une application web complète (Fullstack) permettant de présenter une galerie de photos, de gérer les prestations et de contacter la photographe.
 
-## 🛠 Technologies
-- **Base de données** : MariaDB / MySQL avec un **Pool de connexions** pour la performance.
-- **Serveur** : Node.js (Express, Dotenv, Cors, Mysql2).
-- **Client** : React (Hooks useState/useEffect pour les appels API).
+*   **Frontend** : Interface utilisateur moderne avec React et Vite.
+*   **Backend** : Serveur Node.js avec Express pour la gestion des données.
+*   **Base de données** : MongoDB pour stocker les informations des galeries et des clients.
+
+## 🛠️ Structure du Projet
+Le projet est divisé en deux parties principales :
+*   `/frontend` : Contient tout le code lié à l'interface (React).
+*   `/backend` : Contient l'API et la logique serveur (Node.js).
 
 ## ⚙️ Installation
-1. Clonez le projet.
-2. Créez un fichier `.env` dans `/backend` avec vos accès BDD.
-3. Lancez `npm install` dans les deux dossiers.
+Pour lancer le projet localement :
+
+1. Cloner le projet :
+   `git clone https://github.com/nina444-dot/Hazel_Photographie.git`
+
+2. Installer les dépendances du Frontend :
+   `cd frontend && npm install`
+
+3. Installer les dépendances du Backend :
+   `cd ../backend && npm install`
+
+---
