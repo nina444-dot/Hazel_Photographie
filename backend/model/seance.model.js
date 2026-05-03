@@ -12,7 +12,7 @@ export const findAllFormules = async () => {
     return rows;
 };
 
-// Cherche une séance précise par son ID
+
 export const findSeanceById = async (id) => {
     const [rows] = await pool.query("SELECT * FROM seances_standard WHERE id = ?", [id]);
     return rows[0];
