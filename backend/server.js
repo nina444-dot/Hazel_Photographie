@@ -1,32 +1,18 @@
-const express = require('express');
-const db = require ('./config/db')
-const cors = require('cors');
-require('dotenv').config();
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import seanceRoutes from "./routes/seance.route.js"; 
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-
-db.connect((err) => {
-  if (err) console.error('Erreur BDD:', err);
-  else console.log('Connecté à MySQL !');
-});
+// Branchement des routes
+app.use("/api", seanceRoutes);
 
 
-app.get('/api/formules', (req, res) => {
-  const sql = "SELECT * FROM formules_standard";
-  db.query(sql, (err, result) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Serveur sur le port ${PORT}`);
+    console.log(`Serveur Hazel Photographie lancé sur http://localhost:${PORT}`);
 });
