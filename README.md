@@ -7,7 +7,7 @@ Ce projet est une application web complète (Fullstack) permettant de présenter
 
 *   **Frontend** : Interface utilisateur moderne avec React et Vite.
 *   **Backend** : Serveur Node.js avec Express pour la gestion des données.
-*   **Base de données** : MongoDB pour stocker les informations des galeries et des clients.
+*   **Base de données** : MySQL pour stocker les informations des galeries et des clients.
 
 ## 🛠️ Structure du Projet
 Le projet est divisé en deux parties principales :
