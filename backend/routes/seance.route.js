@@ -1,8 +1,9 @@
 import express from "express";
-import { getSeanceData } from "../controllers/seance.controller.js";
+import { getAllSeances, getSeanceById } from "../controllers/seance.controller.js";
 
 const router = express.Router();
 
-router.get("/seance", getSeanceData);
+router.get("/", getAllSeances);       
+router.get("/:id", getSeanceById);     
 
 export default router;
