@@ -1,9 +1,11 @@
+import Navbar from './components/Navbar';
+
 function App() {
   return (
-   <div className="bg-red-500 h-screen flex justify-center items-center">
-  <h1 className="text-white text-4xl">TEST ROUGE</h1>
-</div>
+    <div className="bg-hazel-light min-h-screen font-cormorant">
+      <Navbar transparent={false}/>
+      
+    </div>
   );
 }
-
 export default App;
