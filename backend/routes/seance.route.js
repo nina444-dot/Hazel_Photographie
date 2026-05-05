@@ -1,8 +1,8 @@
 import express from "express";
-import { getHomeData } from "../controllers/seance.controller.js";
+import { getSeanceData } from "../controllers/seance.controller.js";
 
 const router = express.Router();
 
-router.get("/home", getHomeData);
+router.get("/seance", getSeanceData);
 
 export default router;

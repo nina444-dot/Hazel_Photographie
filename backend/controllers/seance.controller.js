@@ -1,7 +1,7 @@
 import { findAllSeances, findAllFormules } from "../models/seance.model.js";
 
 
-export const getHomeData = async (req, res) => {
+export const getSeanceData = async (req, res) => {
     try {
         // Appelle les fonctions du modèle de manière asynchrone
         const seances = await findAllSeances();
