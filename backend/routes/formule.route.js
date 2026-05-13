@@ -1,8 +1,10 @@
 import express from "express";
-import { getAllFormules } from "../controllers/formule.controller.js";
+import { getAllFormules, getFormulesBySeanceTitre } from "../controllers/formule.controller.js";
 
 const router = express.Router();
 
-router.get("/", getAllFormules);      
+router.get("/", getAllFormules);
+
+router.get("/seance/:titre", getFormulesBySeanceTitre);
 
 export default router;

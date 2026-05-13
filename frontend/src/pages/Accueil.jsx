@@ -1,4 +1,5 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import TarifsModal from '../components/TarifsModale';
 import logo from '../assets/logo.png'
 import fleurMarron from '../assets/fleur-marron.png';
 import flecheGauche from '../assets/fleche-gauche.png';
@@ -7,6 +8,9 @@ import flecheBas from '../assets/fleche-Bas.png'
 
 const Accueil = () => {
     const scrollRef = useRef(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTitre, setSelectedTitre] = useState("");
+
   const scroll = (direction) => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
@@ -15,10 +19,12 @@ const Accueil = () => {
       });
     }
   };
+
+
   return (
     <div className="flex flex-col w-full bg-hazel-light font-cormorant overflow-x-hidden">
       
-      {/* 1. SECTION LOGO - (À remplir avec photo plus tard) */}
+      {/* SECTION LOGO */}
       <section id="accueil" className="min-h-screen relative flex items-center justify-center bg-gray-300">
             <div className="relative z-10 flex flex-col items-center">
            <img 
@@ -26,32 +32,32 @@ const Accueil = () => {
              alt="Captat Hazel Logo" 
              className="w-64 md:w-[450px] object-contain" 
            />
-           <img 
-             src={flecheBas} 
-             alt="Fleche Bas" 
-             className="w-64 md:w-[50px] object-contain" 
-           /> 
+            <img 
+            src={flecheBas} 
+            alt="Fleche Bas" 
+            className="w-8 md:w-[50px] object-contain mt-[20vh] md:mt-10 animate-bounce" 
+            />
         </div>         
       </section>
 
-      {/* 2. SECTION INTRO */}
-      <section className="py-20 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      {/*SECTION INTRO */}
+      <section className="py-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
          <div className="aspect-[3/4] bg-gray-200 shadow-sm">
             {/* Future photo des deux petites filles */}
          </div>
          <div className="text-hazel-rust space-y-6">
             <h2 className="text-4xl leading-tight">Photographe de l'amour, des familles et des commencements.</h2>
-            <p className="text-lg italic leading-relaxed">
+            <p className=" text-hazel-black text-lg medium leading-relaxed">
                Au cœur de l’Aquitaine, à Pau. Ici, chaque séance devient une parenthèse douce, un moment pour ralentir, observer ce qui tremble un peu, ce qui vit doucement. 
             </p>
-            <p className="text-3xl mt-8 leading-snug">Des photos qui ressemblent à ce que vous avez vraiment vécu.</p>
+            <p className="text-4xl leading-tight">Des photos qui ressemblent à ce que vous avez vraiment vécu.</p>
          </div>
       </section>
 
-     {/* 3. SECTION SÉANCES AVEC FLEUR DE LOTUS */}
+     {/* SECTION SÉANCES AVEC FLEUR */}
 <section id="seances" className="scroll-mt-20 py-3 text-center">
   
-  {/* Header de la section avec ta fleur */}
+  
   <div className="mb-12 flex flex-col items-center gap-5">
     <img 
       src={fleurMarron} 
@@ -75,27 +81,25 @@ const Accueil = () => {
           {/* Future photo ici */}
         </div>
 
-        {/* Le bouton superposé avec corner radius de 15px */}
         <button 
-          onClick={() => {
-            if (nom === "Mariage") {
-              // Logique pour la future page Mariage
-              console.log("Redirection vers la page Mariage");
-            } else {
-              // Logique pour ouvrir la modale tarifs
-              console.log(`Ouverture tarifs pour : ${nom}`);
-            }
-          }}
-          className="absolute -bottom-6 bg-hazel-rust text-white px-10 py-3 tracking-widest text-sm uppercase rounded-[15px] shadow-lg hover:bg-opacity-90 transition-all active:scale-95"
-        >
-          {nom}
-        </button>
+  onClick={() => {
+    if (nom === "Mariage") {
+      console.log("Page Mariage");
+    } else {
+      setSelectedTitre(nom); 
+      setIsModalOpen(true);
+    }
+  }}
+  className="absolute -bottom-6 bg-hazel-rust text-white px-10 py-3 tracking-widest text-sm uppercase rounded-[15px] shadow-lg hover:bg-opacity-90 transition active:scale-95 z-20"
+>
+  {nom}
+</button>
       </div>
     ))}
   </div>
 </section>
 
-      {/* 4. SECTION QUI SUIS-JE */}
+      {/* SECTION QUI SUIS-JE */}
       <section id="a-propos" className="scroll-mt-20 py-20 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
          <div className="text-hazel-rust space-y-6">
             <h2 className="text-4xl font-semibold">Qui suis-je ?</h2>
@@ -112,17 +116,17 @@ const Accueil = () => {
          </div>
       </section>
 
-      {/* 5. MINI GALERIE PHOTO */}
+      {/* MINI GALERIE PHOTO */}
 <section className="py-20 bg-hazel-light overflow-hidden">
   <div className="max-w-7xl mx-auto px-8 relative">
     <div className="flex items-center gap-4">
       
-      {/* Flèche Gauche : Ajoute le onClick */}
+      {/* Flèche Gauche */}
       <button onClick={() => scroll('left')} className="z-10 hover:scale-110 transition shrink-0">
         <img src={flecheGauche} alt="Précédent" className="w-8" />
       </button>
 
-      {/* Container : Ajoute la ref, la classe no-scrollbar et le petit <style> */}
+      {/* Container : Ajoute la ref, la classe no-scrollbar et le <style> */}
       <div 
         ref={scrollRef} 
         className="flex gap-4 overflow-x-auto no-scrollbar py-4 scroll-smooth"
@@ -145,7 +149,12 @@ const Accueil = () => {
     </div>
   </div>
 </section>
-
+{/* LA MODALE */}
+      <TarifsModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        titre={selectedTitre} 
+      />
     </div>
   );
 };
