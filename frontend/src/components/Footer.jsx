@@ -9,11 +9,11 @@ const Footer = () => {
     <footer className="w-full mt-auto relative font-cormorant overflow-visible">
       
       {/* BANDEAU MARRON */}
-      <div className="bg-hazel-rust text-hazel-light relative h-24 flex items-center">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-3 items-center px-8">
+      <div className="bg-hazel-rust text-hazel-light relative min-h-[8rem] md:h-24 flex items-center py-12 md:py-0">
+        <div className="max-w-7xl mx-auto w-full flex flex-col md:grid md:grid-cols-3 items-center px-8 gap-10 md:gap-0">
           
-          {/* GAUCHE*/}
-          <div className="flex flex-col items-start gap-2">
+          {/* GAUCHE : RÉSEAUX */}
+          <div className="flex flex-col items-center md:items-start gap-2">
             <h3 className="font-semibold tracking-widest uppercase opacity-90">Réseau Social</h3>
             <div className="flex items-center gap-3 italic">
               <img src={instagramIcon} alt="" className="w-4 h-4 object-contain" />
@@ -21,44 +21,40 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* LOGO*/}
-          <div className="relative flex justify-center">
+          {/* CENTRE : LOGO */}
+          <div className="relative flex justify-center h-10 md:h-auto">
             <img 
               src={logo} 
               alt="Logo Captat Hazel" 
-              className="absolute h-48 w-auto object-contain"
-              style={{ top: '-100px' }} 
+              className="absolute h-36 md:h-48 w-auto object-contain"
+              style={{ top: '-80px' }} 
             />
           </div>
 
-         {/* DROITE : LOC */}
-<div className="flex flex-col items-end"> 
-  <div className="flex flex-col items-start gap-2 italic">
-    
-    <div className="flex items-center gap-3">
-      <div className="w-6 flex justify-center">
-        <img src={locIcon} alt="" className="w-4 h-4 object-contain" />
+          {/* DROITE : INFOS */}
+          <div className="flex flex-col items-center md:items-end w-full"> 
+            <div className="flex flex-col items-center md:items-start gap-2 italic">
+              <div className="flex items-center gap-3">
+                <div className="w-6 flex justify-center">
+                  <img src={locIcon} alt="" className="w-4 h-4 object-contain" />
+                </div>
+                <span className="text-lg">Basée à Géus-d'Arzacq</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 flex justify-center">
+                  <img src={mailIcon} alt="" className="w-5 h-5 object-contain" />
+                </div>
+                <span className="text-lg">captathazel@gmail.com</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <span className="text-lg">Basée à Géus-d'Arzacq</span>
-    </div>
-
-    {/* Mail */}
-    <div className="flex items-center gap-3">
-      <div className="w-6 flex justify-center">
-        <img src={mailIcon} alt="" className="w-5 h-5 object-contain" />
-      </div>
-      <span className="text-lg">captathazel@gmail.com</span>
-    </div>
-
-  </div>
-</div>
-    </div>
-    </div>
-    
-
+      
       {/* COPYRIGHT */}
-      <div className="bg-hazel-rust w-full py-3">
-        <p className="text-center italic text-sm text-hazel-light opacity-60 tracking-widest">
+      <div className="bg-hazel-rust w-full py-3 border-t border-white/10">
+        <p className="text-center italic text-xs md:text-sm text-hazel-light opacity-60 tracking-widest px-4">
           @2026 captathazel tous droits réservés | créé par dominguez nina
         </p>
       </div>
