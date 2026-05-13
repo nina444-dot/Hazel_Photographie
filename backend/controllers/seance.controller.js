@@ -1,4 +1,5 @@
-import { findAllSeances, findSeanceById } from "../models/seance.model.js";
+import { findAllSeances, findSeanceById, findFormulesByTitre } from "../models/seance.model.js";
+
 
 export const getAllSeances = async (req, res) => {
     try {
@@ -9,6 +10,7 @@ export const getAllSeances = async (req, res) => {
     }
 };
 
+
 export const getSeanceById = async (req, res) => {
     try {
         const seance = await findSeanceById(req.params.id);
@@ -16,5 +18,22 @@ export const getSeanceById = async (req, res) => {
         res.status(200).json(seance);
     } catch (error) {
         res.status(500).json({ message: "Erreur serveur", error: error.message });
+    }
+};
+
+// Modale
+export const getFormulesBySeanceTitre = async (req, res) => {
+    try {
+        const { titre } = req.params;
+        // On appelle une nouvelle méthode dans le model
+        const formules = await findFormulesByTitre(titre);
+        
+        if (!formules || formules.length === 0) {
+            return res.status(404).json({ message: "Aucune formule trouvée pour ce titre" });
+        }
+        
+        res.status(200).json(formules);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la récupération des formules", error: error.message });
     }
 };
