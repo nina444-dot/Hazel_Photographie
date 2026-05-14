@@ -12,3 +12,17 @@
     scrollbar-width: none;
   }
 }
+
+/* Logo user */
+.icon-user-hazel {
+  background-color: #FFE3D5; 
+  
+  /* Utilisation de l'icône comme un pochoir (masque) */
+  mask: url('./src/assets/user-icon.png') no-repeat center;
+  -webkit-mask: url('./src/assets/user-icon.png') no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+
+.icon-user-hazel:hover {
+  background-color: #B6856B;
+}
