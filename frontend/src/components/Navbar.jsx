@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import userIcon from '../assets/user-icon.png';
 
 const Navbar = ({ transparent }) => {
   return (
@@ -26,9 +25,19 @@ const Navbar = ({ transparent }) => {
       
       <ul className="flex flex-grow justify-center items-center max-w-[70%] mx-auto text-[11px] md:text-xl lg:text-2xl gap-20 tracking-[0.15em]">
         <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Mariages</li>
-        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Les Séances</li>
+        
+        {/* LIEN LES SÉANCES */}
+        <li className="hover:text-hazel-btn transition whitespace-nowrap">
+          <a href="#seances">Les Séances</a>
+        </li>
+        
         <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Bons Cadeaux</li>
-        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">À propos</li>
+        
+        {/* LIEN À PROPOS */}
+        <li className="hover:text-hazel-btn transition whitespace-nowrap">
+          <a href="#a-propos">À propos</a>
+        </li>
+        
         <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Contact</li>
       </ul>
 
