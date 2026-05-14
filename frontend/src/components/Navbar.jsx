@@ -25,20 +25,20 @@ const Navbar = ({ transparent }) => {
       </div>
       
       <ul className="flex flex-grow justify-center items-center max-w-[70%] mx-auto text-[11px] md:text-xl lg:text-2xl gap-20 tracking-[0.15em]">
-  <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Mariages</li>
-  <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Les Séances</li>
-  <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Bons Cadeaux</li>
-  <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">À propos</li>
-  <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Contact</li>
-</ul>
+        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Mariages</li>
+        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Les Séances</li>
+        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Bons Cadeaux</li>
+        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">À propos</li>
+        <li className="hover:text-hazel-btn cursor-pointer transition whitespace-nowrap">Contact</li>
+      </ul>
 
       {/* PROFIL */}
-   <div className="flex-shrink-0">
-  <div 
-    className="w-5 h-5 md:w-6 md:h-6 cursor-pointer transition-colors duration-300 icon-user-hazel"
-    aria-label="Profil"
-  />
-</div>
+      <div className="flex-shrink-0">
+        <div 
+          className="w-5 h-5 md:w-6 md:h-6 cursor-pointer transition-colors duration-300 icon-user-hazel"
+          aria-label="Profil"
+        />
+      </div>
     </nav>
   );
 };
