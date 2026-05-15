@@ -13,7 +13,7 @@
   }
 }
 
-/* Logo user */
+/* Logo user 
 .icon-user-hazel {
   background-color: #FFE3D5; 
   mask: url('./assets/user-icon.png') no-repeat center;
@@ -25,8 +25,28 @@
 .icon-user-hazel:hover {
   background-color: #B6856B;
   cursor: pointer;
+}*/
+
+/* Logo user de base */
+.icon-user-hazel {
+  background-color: #FFE3D5; /* Couleur par défaut */
+  mask: url('./assets/user-icon.png') no-repeat center;
+  -webkit-mask: url('./assets/user-icon.png') no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  display: inline-block; /* Sécurité pour l'affichage */
 }
 
+/* On définit le hover CSS uniquement pour les appareils avec souris */
+@media (hover: hover) {
+  .icon-user-hazel:hover {
+    background-color: #B6856B;
+    cursor: pointer;
+  }
+}
+
+
+/*Scroll même page*/
 html {
   scroll-behavior: smooth;
 }
