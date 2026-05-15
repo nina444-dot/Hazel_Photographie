@@ -109,7 +109,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
               <div ref={modalScrollRef} className="flex gap-3 overflow-x-auto no-scrollbar scroll-smooth py-2">
                 {[1, 2, 3, 4, 5].map((img) => (
                   <div key={img} className="min-w-[140px] aspect-square bg-gray-200 shadow-sm shrink-0 rounded-sm overflow-hidden border border-white">
-                    {/* Les images viendront ici */}
+                    
                   </div>
                 ))}
               </div>
