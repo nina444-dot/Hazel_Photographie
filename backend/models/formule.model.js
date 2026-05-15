@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
 
-// --- READ (Déjà fait, on ne touche à rien) ---
+//READ
 export const findFormulesByTitre = async (titre) => {
     const query = `
         SELECT f.id, f.nom, f.prix, f.details 
@@ -17,7 +17,7 @@ export const findAllFormules = async () => {
     return rows;
 };
 
-// --- CREATE (Même style que tes GET) ---
+// CREATE 
 export const createFormule = async (nom, prix, details) => {
     const [result] = await pool.query(
         "INSERT INTO formules_standard (nom, prix, details) VALUES (?, ?, ?)",
@@ -33,7 +33,7 @@ export const linkFormuleToSeance = async (seance_id, formule_id) => {
     );
 };
 
-// --- UPDATE & DELETE ---
+// UPDATE et DELETE 
 export const updateFormule = async (id, nom, prix, details) => {
     await pool.query(
         "UPDATE formules_standard SET nom = ?, prix = ?, details = ? WHERE id = ?",

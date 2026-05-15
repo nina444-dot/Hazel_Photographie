@@ -1,7 +1,5 @@
 import * as FormuleModel from "../models/formule.model.js";
 
-// --- RÉCUPÉRATION (Public) ---
-
 export const getFormulesBySeanceTitre = async (req, res) => {
     try {
         const { titre } = req.params;
@@ -27,15 +25,14 @@ export const getAllFormules = async (req, res) => {
     }
 };
 
-// --- GESTION (Admin) ---
-
+//GESTION ADMIN
+//insertion de nouvelles données dynamiques
 export const addFormule = async (req, res) => {
     try {
         const { nom, prix, details, seance_id } = req.body;
-        // 1. On crée la formule dans la table de base
+        
         const newId = await FormuleModel.createFormule(nom, prix, details);
         
-        // 2. On crée le lien dans la table de liaison seance_formules
         if (seance_id) {
             await FormuleModel.linkFormuleToSeance(seance_id, newId);
         }
