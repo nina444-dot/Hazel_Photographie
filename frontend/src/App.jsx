@@ -1,16 +1,18 @@
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom'; 
 import Accueil from './pages/Accueil';
+import Login from './pages/Login';
 
 function App() {
   return (
     <div className="bg-hazel-light min-h-screen flex flex-col font-cormorant">
-      <Navbar transparent={true} />
       <main className="flex-grow">
-        <Accueil />
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </main>
-      <Footer />
     </div>
   );
 }
+
 export default App;

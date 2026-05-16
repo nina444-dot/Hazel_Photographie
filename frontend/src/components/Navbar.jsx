@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const Navbar = ({ transparent }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,6 +16,26 @@ const Navbar = ({ transparent }) => {
   const closeMenu = () => {
     setIsOpen(false);
     document.body.style.overflow = 'unset';
+  };
+
+  
+  const handleHashLink = (e, targetId) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (location.pathname === '/') {
+      // Si on est déjà sur l'accueil, on scroll directement
+      const element = document.getElementById(targetId);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      
+      navigate('/');
+      
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   return (
@@ -39,17 +61,26 @@ const Navbar = ({ transparent }) => {
       {/* MENU DESKTOP */}
       <ul className="hidden md:flex flex-grow justify-center items-center gap-10 lg:gap-20 text-xl lg:text-2xl tracking-[0.15em]">
         <li className="hover:text-hazel-btn transition"><Link to="/mariages">Mariages</Link></li>
-        <li className="hover:text-hazel-btn transition"><a href="/#seances">Les Séances</a></li>
+        
+        <li className="hover:text-hazel-btn transition">
+          <a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a>
+        </li>
+        
         <li className="hover:text-hazel-btn transition"><Link to="/cadeaux">Bons Cadeaux</Link></li>
-        <li className="hover:text-hazel-btn transition"><a href="/#a-propos">À propos</a></li>
+        
+        <li className="hover:text-hazel-btn transition">
+          <a href="#a-propos" onClick={(e) => handleHashLink(e, 'a-propos')}>À propos</a>
+        </li>
+        
         <li className="hover:text-hazel-btn transition"><Link to="/contact">Contact</Link></li>
       </ul>
 
       {/* BLOC DROITE */}
       <div className="flex items-center gap-4 md:gap-8 z-[120]">
         <div className="flex-shrink-0">
-          {/* L'icône profil est gérée par la classe CSS */}
-          <div className="w-5 h-5 md:w-6 md:h-6 icon-user-hazel" aria-label="Profil" />
+          <Link to="/login" className="block cursor-pointer hover:opacity-80 transition">
+            <div className="w-5 h-5 md:w-6 md:h-6 icon-user-hazel" aria-label="Profil" />
+          </Link>
         </div>
 
         <button 
@@ -70,9 +101,14 @@ const Navbar = ({ transparent }) => {
         <div className="absolute inset-0 bg-hazel-rust/60 backdrop-blur-2xl" />
         <ul className="relative h-full flex flex-col items-center justify-center gap-10 text-3xl tracking-[0.2em] text-white italic">
           <li onClick={closeMenu}><Link to="/mariages">Mariages</Link></li>
-          <li onClick={closeMenu}><a href="/#seances">Les Séances</a></li>
+          
+          
+          <li><a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a></li>
+          
           <li onClick={closeMenu}><Link to="/cadeaux">Bons Cadeaux</Link></li>
-          <li onClick={closeMenu}><a href="/#a-propos">À propos</a></li>
+          
+          <li><a href="#a-propos" onClick={(e) => handleHashLink(e, 'a-propos')}>À propos</a></li>
+          
           <li onClick={closeMenu}><Link to="/contact">Contact</Link></li>
         </ul>
       </div>

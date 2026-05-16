@@ -43,7 +43,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
       {/* Conteneur Modale : overflow-hidden pour que la croix reste fixe */}
       <div className="relative bg-hazel-light w-full max-w-4xl shadow-2xl rounded-sm flex flex-col max-h-[90vh] font-cormorant overflow-hidden">
         
-        {/* BOUTON FERMER : absolute pour ne pas décaler le texte, fixe par rapport au conteneur blanc */}
+        {/* BOUTON FERMER */}
         <button 
           onClick={onClose} 
           className="absolute top-4 right-6 text-3xl text-hazel-rust font-light z-[120] hover:scale-110 transition-transform p-2"
