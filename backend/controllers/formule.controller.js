@@ -25,23 +25,26 @@ export const getAllFormules = async (req, res) => {
     }
 };
 
-//GESTION ADMIN
-//insertion de nouvelles données dynamiques
+
+// CREATE
 export const addFormule = async (req, res) => {
     try {
-        const { nom, prix, details, seance_id } = req.body;
+        const { nom, prix, details } = req.body;
         
         const newId = await FormuleModel.createFormule(nom, prix, details);
         
-        if (seance_id) {
-            await FormuleModel.linkFormuleToSeance(seance_id, newId);
+        const seanceIds = [1, 2, 3, 4, 5];
+        
+        for (const seanceId of seanceIds) {
+            await FormuleModel.linkFormuleToSeance(seanceId, newId);
         }
         
         res.status(201).json({ 
-            message: "Formule ajoutée avec succès", 
+            message: "Formule ajoutée et liée à toutes les séances avec succès", 
             id: newId 
         });
     } catch (error) {
+        console.error("Erreur dans addFormule :", error);
         res.status(500).json({ 
             message: "Erreur lors de l'ajout", 
             error: error.message 
@@ -49,6 +52,7 @@ export const addFormule = async (req, res) => {
     }
 };
 
+// UPDATE
 export const editFormule = async (req, res) => {
     try {
         const { id } = req.params;
@@ -63,11 +67,16 @@ export const editFormule = async (req, res) => {
     }
 };
 
+// DELETE
 export const removeFormule = async (req, res) => {
     try {
         const { id } = req.params;
+        
+        await FormuleModel.deleteFormuleLinks(id);
+        
         await FormuleModel.deleteFormule(id);
-        res.status(200).json({ message: "Formule supprimée" });
+        
+        res.status(200).json({ message: "Formule et liaisons supprimées avec succès" });
     } catch (error) {
         res.status(500).json({ 
             message: "Erreur lors de la suppression", 

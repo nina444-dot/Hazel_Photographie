@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axios"; 
+import { useAuth } from "../context/AuthContext"; // Import du hook global
 import Navbar from "../components/Navbar";
 
-
+// Schéma de validation Zod
 const schema = z.object({
   username: z.string().min(3, "Le nom d'utilisateur doit contenir au moins 3 caractères"),
   password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
@@ -14,15 +14,17 @@ const schema = z.object({
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Récupération de la fonction de connexion du contexte
+  
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data) => {
     try {
-      const res = await api.post("/auth/login", data);
-      localStorage.setItem("adminToken", res.data.token);
-      navigate("/admin/dashboard");
+      // On passe par le AuthContext pour authentifier l'utilisateur
+      await login(data.username, data.password);
+      navigate("/admin/dashboard"); // Redirection absolue et propre
     } catch (error) {
       alert(error.response?.data?.message || "Identifiants invalides");
     }
@@ -33,7 +35,6 @@ function Login() {
       <Navbar transparent={false} />
 
       <div className="flex-grow flex items-center justify-center px-4 py-12">
-
         <div className="max-w-md w-full bg-white/80 backdrop-blur-sm p-10 rounded-2xl shadow-xl border border-hazel-btn/20 text-center">
           
           <h2 className="text-4xl font-bold text-hazel-rust mb-2 tracking-wide">
@@ -77,7 +78,7 @@ function Login() {
               )}
             </div>
 
-            {/* BTN */}
+            {/* BOUTON DE SOUMISSION */}
             <div className="pt-2">
               <button 
                 type="submit" 

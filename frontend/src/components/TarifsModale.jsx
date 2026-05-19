@@ -43,7 +43,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
       {/* Conteneur Modale : overflow-hidden pour que la croix reste fixe */}
       <div className="relative bg-hazel-light w-full max-w-4xl shadow-2xl rounded-sm flex flex-col max-h-[90vh] font-cormorant overflow-hidden">
         
-        {/* BOUTON FERMER */}
+        {/* BTN FERMER */}
         <button 
           onClick={onClose} 
           className="absolute top-4 right-6 text-3xl text-hazel-rust font-light z-[120] hover:scale-110 transition-transform p-2"
@@ -52,7 +52,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
           ✕
         </button>
 
-        {/* ZONE DE CONTENU SCROLLABLE */}
+        {/* ZONE SCROLLABLE */}
         <div className="overflow-y-auto p-6 md:p-10 no-scrollbar">
           <div className="flex flex-col items-center">
             
@@ -95,7 +95,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
               </ul>
             </div>
 
-            {/* Bouton Contact */}
+            {/* Btn Contact */}
             <button className="bg-hazel-rust text-white px-12 py-3 rounded-[15px] text-xl hover:bg-opacity-90 shadow-md mb-10 tracking-widest transition-all">
               Me contacter
             </button>

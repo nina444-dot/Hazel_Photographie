@@ -23,7 +23,7 @@ export const createFormule = async (nom, prix, details) => {
         "INSERT INTO formules_standard (nom, prix, details) VALUES (?, ?, ?)",
         [nom, prix, details]
     );
-    return result.insertId; // On récupère l'ID pour pouvoir lier à la séance après
+    return result.insertId; 
 };
 
 export const linkFormuleToSeance = async (seance_id, formule_id) => {
@@ -43,4 +43,11 @@ export const updateFormule = async (id, nom, prix, details) => {
 
 export const deleteFormule = async (id) => {
     await pool.query("DELETE FROM formules_standard WHERE id = ?", [id]);
+};
+
+export const deleteFormuleLinks = async (formule_id) => {
+    await pool.query(
+        "DELETE FROM seance_formules WHERE formule_id = ?",
+        [formule_id]
+    );
 };
