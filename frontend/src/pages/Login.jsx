@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // Import du hook global
+import { useAuth } from "../context/AuthContext"; 
 import Navbar from "../components/Navbar";
 
-// Schéma de validation Zod
+
 const schema = z.object({
   username: z.string().min(3, "Le nom d'utilisateur doit contenir au moins 3 caractères"),
   password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
@@ -14,7 +14,7 @@ const schema = z.object({
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Récupération de la fonction de connexion du contexte
+  const { login } = useAuth(); 
   
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
@@ -24,7 +24,7 @@ function Login() {
     try {
       // On passe par le AuthContext pour authentifier l'utilisateur
       await login(data.username, data.password);
-      navigate("/admin/dashboard"); // Redirection absolue et propre
+      navigate("/admin/dashboard"); 
     } catch (error) {
       alert(error.response?.data?.message || "Identifiants invalides");
     }
@@ -46,7 +46,7 @@ function Login() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-left">
             
-            {/* CHAMP NOM D'UTILISATEUR */}
+            {/* CHAMP USER */}
             <div>
               <label className="block text-lg font-medium text-hazel-brown mb-2 tracking-wide">
                 Nom d'utilisateur
@@ -62,7 +62,7 @@ function Login() {
               )}
             </div>
 
-            {/* CHAMP MOT DE PASSE */}
+            {/* CHAMP MDP */}
             <div>
               <label className="block text-lg font-medium text-hazel-brown mb-2 tracking-wide">
                 Mot de passe
@@ -78,7 +78,7 @@ function Login() {
               )}
             </div>
 
-            {/* BOUTON DE SOUMISSION */}
+            {/* BTN SUBMIT */}
             <div className="pt-2">
               <button 
                 type="submit" 

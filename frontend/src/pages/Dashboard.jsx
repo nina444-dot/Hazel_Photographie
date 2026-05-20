@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useAuth } from "../context/AuthContext"; // Import du hook global
+import { useAuth } from "../context/AuthContext"; 
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { logout } = useAuth(); // Récupération de la fonction de déconnexion
+  const { logout } = useAuth(); 
 
   // États pour le formulaire d'ajout
   const [nom, setNom] = useState("");
@@ -40,13 +40,13 @@ function Dashboard() {
     }
   };
 
-  // ACTION : Déconnexion via le contexte
+  // DECONNEXION
   const handleLogout = async () => {
     await logout();
     navigate("/login"); 
   };
 
-  // CREATE : Ajouter une formule
+  // CREATE
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nom.trim() || !prix.trim()) {
@@ -69,7 +69,7 @@ function Dashboard() {
     }
   };
 
-  // DELETE : Supprimer une formule (avec suppression en cascade côté API)
+  // DELETE 
   const handleDelete = async (id) => {
     if (window.confirm("Voulez-vous vraiment supprimer définitivement cette formule de la base de données ?")) {
       try {
@@ -91,7 +91,7 @@ function Dashboard() {
     setIsModalOpen(true);
   };
 
-  // UPDATE : Enregistrer les modifications
+  // UPDATE 
   const handleUpdateFormule = async (e) => {
     e.preventDefault();
     if (!editNom.trim() || !editPrix.trim()) {
@@ -118,7 +118,7 @@ function Dashboard() {
 
       <div className="flex-grow max-w-5xl w-full mx-auto px-6 py-16">
         
-        {/* En-tête et bouton déconnexion */}
+        {/* En-tête et btn déconnexion */}
         <div className="mb-12 flex justify-between items-start">
           <div>
             <h1 className="text-5xl text-hazel-rust tracking-wide mb-2">Bonjour, Christel</h1>
@@ -207,7 +207,7 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Modale de Modification sur-mesure */}
+      {/* Modale*/}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
           <div className="bg-hazel-light border border-hazel-rust/20 max-w-md w-full p-8 rounded-[2px] shadow-xl text-hazel-brown relative">
