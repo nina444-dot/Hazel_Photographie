@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from "../api/axios"; 
 import fleurMarron from '../assets/fleur-marron.png';
 import flecheGauche from '../assets/fleche-gauche.png';
@@ -40,7 +41,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
       {/* Arrière-plan sombre avec flou */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose}></div>
 
-      {/* Conteneur Modale : overflow-hidden pour que la croix reste fixe */}
+      {/* Conteneur Modale */}
       <div className="relative bg-hazel-light w-full max-w-4xl shadow-2xl rounded-sm flex flex-col max-h-[90vh] font-cormorant overflow-hidden">
         
         {/* BTN FERMER */}
@@ -95,10 +96,14 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
               </ul>
             </div>
 
-            {/* Btn Contact */}
-            <button className="bg-hazel-rust text-white px-12 py-3 rounded-[15px] text-xl hover:bg-opacity-90 shadow-md mb-10 tracking-widest transition-all">
+            
+            <Link 
+              to="/contact"
+              onClick={onClose} 
+              className="bg-hazel-rust text-white text-center px-12 py-3 rounded-[15px] text-xl hover:bg-opacity-90 shadow-md mb-10 tracking-widest transition-all block inline-block"
+            >
               Me contacter
-            </button>
+            </Link>
 
             {/* Mini Galerie Photos */}
             <div className="flex items-center gap-2 w-full mt-4 px-4">

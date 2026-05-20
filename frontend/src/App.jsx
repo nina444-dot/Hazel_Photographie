@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'; 
 import Accueil from './pages/Accueil';
 import Login from './pages/Login';
+import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext'; 
@@ -11,11 +12,11 @@ function App() {
       <div className="bg-hazel-light min-h-screen flex flex-col font-cormorant">
         <main className="flex-grow">
           <Routes>
-            {/* Routes publiques */}
             <Route path="/" element={<Accueil />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/contact" element={<Contact />} />
             
-            {/*Route protégée */}
+    
             <Route 
               path="/admin/dashboard" 
               element={
