@@ -3,11 +3,11 @@ import Accueil from './pages/Accueil';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
-import { AuthProvider } from './context/AuthContext'; // On importe le provider
+import { AuthProvider } from './context/AuthContext'; 
 
 function App() {
   return (
-    <AuthProvider> {/* 💡 On enveloppe toute l'application */}
+    <AuthProvider>
       <div className="bg-hazel-light min-h-screen flex flex-col font-cormorant">
         <main className="flex-grow">
           <Routes>
@@ -15,7 +15,7 @@ function App() {
             <Route path="/" element={<Accueil />} />
             <Route path="/login" element={<Login />} />
             
-            {/* 🔒 Route protégée par PrivateRoute */}
+            {/*Route protégée */}
             <Route 
               path="/admin/dashboard" 
               element={
