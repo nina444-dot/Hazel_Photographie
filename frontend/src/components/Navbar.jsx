@@ -66,7 +66,7 @@ const Navbar = ({ transparent }) => {
           <a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a>
         </li>
         
-        <li className="hover:text-hazel-btn transition"><Link to="/cadeaux">Bons Cadeaux</Link></li>
+        <li className="hover:text-hazel-btn transition"><Link to="/bon-cadeau">Bons Cadeaux</Link></li>
         
         <li className="hover:text-hazel-btn transition">
           <a href="#a-propos" onClick={(e) => handleHashLink(e, 'a-propos')}>À propos</a>
@@ -105,7 +105,7 @@ const Navbar = ({ transparent }) => {
           
           <li><a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a></li>
           
-          <li onClick={closeMenu}><Link to="/cadeaux">Bons Cadeaux</Link></li>
+          <li onClick={closeMenu}><Link to="/bon-cadeau">Bons Cadeaux</Link></li>
           
           <li><a href="#a-propos" onClick={(e) => handleHashLink(e, 'a-propos')}>À propos</a></li>
           
