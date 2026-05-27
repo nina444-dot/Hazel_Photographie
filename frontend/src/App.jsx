@@ -5,6 +5,7 @@ import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext'; 
+import BonCadeau from './pages/BonCadeau';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             <Route path="/" element={<Accueil />} />
             <Route path="/login" element={<Login />} />
             <Route path="/contact" element={<Contact />} />
-            
+            <Route path="/bon-cadeau" element={<BonCadeau />} />
     
             <Route 
               path="/admin/dashboard" 
@@ -26,7 +27,7 @@ function App() {
               }
             />
 
-            {/* Redirection automatique pour les URL inconnues */}
+            {/* Redirection auto pour les URL inconnues */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes> 
         </main>
