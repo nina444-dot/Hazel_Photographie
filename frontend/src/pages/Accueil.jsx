@@ -55,6 +55,9 @@ const Accueil = () => {
             backgroundRepeat: 'no-repeat'
           }}
         >
+          {/* Balise H1 SEO ("sr-only" pour cacher) */}
+          <h1 className="sr-only">Hazel Photographie - Photographe de mariage et instants de vie à Pau</h1>
+
           <div className="relative z-10 flex flex-col items-center">
             <img 
               src={logo} 
@@ -140,25 +143,48 @@ const Accueil = () => {
         </section>
 
         {/* SECTION "QUI SUIS-JE" */}
-        <section id="a-propos" className="scroll-mt-20 py-20 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-           <div className="text-hazel-rust space-y-6">
-              <h2 className="text-4xl font-semibold">Qui suis-je ?</h2>
-              <div className="text-hazel-brown space-y-4 text-lg font-bold leading-relaxed text-justify">
-                 <p>Je m'appelle Christel. Depuis que je suis petite, j'ai toujours vu le monde comme à travers un objectif certaine que la lumière juste, le bon angle, pouvaient transformer un instant en quelque chose de précieux.</p>
-                 <p>C'est mon père qui a allumé cette flamme. Avec son appareil argentique, il capturait des autoportraits au milieu des forêts. Le grain de ses photos, leur charme intemporel, m'ont envoûtée. À 13 ans, j'ai reçu mon premier appareil. Le plus beau cadeau qu'on pouvait me faire.</p>
-                 <p>J'ai tout appris seule, en essayant, en recommençant. Et j'ai découvert ce que j'aimais vraiment : les gens qui s'aiment, les enfants, les instants simples. La vie, en somme.</p>
-                 <p>Mais je me suis aussi lancée pour une raison qui me tient profondément à cœur : aider les femmes à se voir autrement. Mon objectif est de montrer à chaque femme qu'elle mérite de se regarder avec bienveillance et amour.</p>
-                 <p>Ici, pas de perfection ni de mise en scène. Juste vous, vos émotions, vos gestes, vos liens.</p>
-              </div>
-           </div>
-           <div className="aspect-[3/4] bg-gray-200 shadow-xl mt-12 md:mt-0 overflow-hidden rounded-[5px]">
-              <img 
-                src={photoFemme} 
-                alt="Portrait de Christel" 
-                className="w-full h-full object-cover" 
-              />
-           </div>
-        </section>
+<section id="a-propos" className="scroll-mt-20 py-20 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+   <div className="text-hazel-rust space-y-6">
+      
+      <h2 className="text-4xl font-semibold">Qui suis-je ?</h2>
+      
+      <div className="text-hazel-brown space-y-4 text-lg leading-relaxed text-justify">
+         <p>
+            <strong>
+               Je m'appelle Christel. Depuis que je suis petite, j'ai toujours vu le monde comme à travers un objectif, certaine que la lumière juste, le bon angle, pouvaient transformer un instant en quelque chose de précieux.
+            </strong>
+         </p>
+         <p>
+            <strong>
+               C'est mon père qui a allumé cette flamme. Avec son appareil argentique, il capturait des autoportraits au milieu des forêts. Le grain de ses photos, leur charme intemporel, m'ont envoûtée. À 13 ans, j'ai reçu mon premier appareil. Le plus beau cadeau qu'on pouvait me faire.
+            </strong>
+         </p>
+         <p>
+            <strong>
+               J'ai tout appris seule, en essayant, en recommençant. Et j'ai découvert ce que j'aimais vraiment : les gens qui s'aiment, les enfants, les instants simples. La vie, en somme.
+            </strong>
+         </p>
+         <p>
+            <strong>
+               Mais je me suis aussi lancée pour une raison qui me tient profondément à cœur : aider les femmes à se voir autrement. Mon objectif est de montrer à chaque femme qu'elle mérite de se regarder avec bienveillance et amour.
+            </strong>
+         </p>
+         <p>
+            <strong>
+               Ici, pas de perfection ni de mise en scène. Juste vous, vos émotions, vos gestes, vos liens.
+            </strong>
+         </p>
+      </div>
+   </div>
+   
+   <div className="aspect-[3/4] bg-gray-200 shadow-xl mt-12 md:mt-0 overflow-hidden rounded-[5px]">
+      <img 
+         src={photoFemme} 
+         alt="Portrait de Christel" 
+         className="w-full h-full object-cover" 
+      />
+   </div>
+</section>
 
         {/* MINI GALERIE PHOTO */}
         <section className="py-20 bg-hazel-light overflow-hidden">
