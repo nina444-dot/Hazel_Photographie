@@ -19,6 +19,7 @@
     "react-hook-form": "^7.75.0",
     "react-router-dom": "^7.15.0",
     "react-router-hash-link": "^2.4.3",
+    "react-turnstile": "^1.1.5",
     "zod": "^4.4.3"
   },
   "devDependencies": {

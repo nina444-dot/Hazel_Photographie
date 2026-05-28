@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/axios";
+import { Turnstile } from "react-turnstile";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import imageCouple from "../assets/bon-cadeaux.webp"; 
@@ -15,6 +16,7 @@ function BonCadeau() {
   });
 
   const [status, setStatus] = useState({ loading: false, success: null, error: null });
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,10 +24,23 @@ function BonCadeau() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
+    if (!captchaToken) {
+      setStatus({ 
+        loading: false, 
+        success: null, 
+        error: "Veuillez valider la vérification de sécurité (CAPTCHA)." 
+      });
+      return;
+    }
+
     setStatus({ loading: true, success: null, error: null });
 
     try {
-      const res = await api.post("/bon-cadeau", formData);
+      // Envoie les données du formulaire accompagnées du token de sécurité
+      const res = await api.post("/bon-cadeau", { ...formData, captchaToken });
+      
       setStatus({ loading: false, success: res.data.message, error: null });
       setFormData({
         prenomAcheteur: "",
@@ -35,6 +50,8 @@ function BonCadeau() {
         prestation: "",
         message: "",
       });
+      setCaptchaToken(null); 
+
     } catch (err) {
       setStatus({
         loading: false,
@@ -51,7 +68,7 @@ function BonCadeau() {
       {/* ZONE PRINCIPALE */}
       <div className="flex-grow flex flex-col md:flex-row">
         
-        {/* PHOTO */}
+        {/* IMG */}
         <div className="w-full md:w-1/2 relative min-h-[300px] h-[320px] sm:h-[400px] md:h-auto flex justify-center text-center">
           <img 
             src={imageCouple} 
@@ -64,7 +81,7 @@ function BonCadeau() {
           {/* TITRES */}
           <div className="absolute top-8 left-4 right-4 z-10 max-w-md mx-auto drop-shadow-lg md:top-1/4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl tracking-wide font-normal font-cormorant text-hazel-light uppercase">
-              Bon Cadeaux
+              Bon Cadeau
             </h1>
             <p className="text-base sm:text-lg md:text-1xl uppercase font-bold tracking-wider mt-2 text-hazel-light">
               Des souvenirs inoubliables à offrir !
@@ -97,7 +114,7 @@ function BonCadeau() {
                     />
                   </div>
                   <div>
-                    <label className="block text-base font-medium  mb-1.5 text-white">Nom *</label>
+                    <label className="block text-base font-medium mb-1.5 text-white">Nom *</label>
                     <input
                       type="text"
                       name="nomAcheteur"
@@ -110,7 +127,7 @@ function BonCadeau() {
                 </div>
 
                 <div>
-                  <label className="block text-base font-medium  mb-1.5 text-white">Adresse e-mail *</label>
+                  <label className="block text-base font-medium mb-1.5 text-white">Adresse e-mail *</label>
                   <input
                     type="email"
                     name="emailAcheteur"
@@ -122,23 +139,21 @@ function BonCadeau() {
                 </div>
 
                 <div className="pt-2 space-y-4">
-                  
                   <div>
-                    <label className="block text-base font-medium  mb-1.5 text-white">Pour qui ? (Nom du/des bénéficiaire(s)) *</label>
+                    <label className="block text-base font-medium mb-1.5 text-white">Pour qui ? (Nom du/des bénéficiaire(s)) *</label>
                     <input
                       type="text"
                       name="nomBeneficiaire"
                       required
-                      placeholder ="Ex: Marie : De la part de Tom"
+                      placeholder="Ex: Marie : De la part de Tom"
                       value={formData.nomBeneficiaire}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 bg-transparent border border-white/40 text-white rounded outline-none focus:border-white transition-all  placeholder-hazel-light/80"
+                      className="w-full px-3 py-2 bg-transparent border border-white/40 text-white rounded outline-none focus:border-white transition-all placeholder-hazel-light/80"
                     />
                   </div>
 
-    
                   <div>
-                    <label className="block text-base font-medium  mb-1.5 text-white">Formule souhaitée *</label>
+                    <label className="block text-base font-medium mb-1.5 text-white">Formule souhaitée *</label>
                     <div className="relative">
                       <select
                         name="prestation"
@@ -161,9 +176,8 @@ function BonCadeau() {
                     </div>
                   </div>
 
-
                   <div>
-                    <label className="block text-base font-medium  mb-1.5 text-white">Message (Optionnel)</label>
+                    <label className="block text-base font-medium mb-1.5 text-white">Message (Optionnel)</label>
                     <textarea
                       name="message"
                       rows="3"
@@ -175,7 +189,7 @@ function BonCadeau() {
                   </div>
                 </div>
 
-                {/* Notif d'API */}
+                {/* NOTIFICATIONS API */}
                 {status.success && (
                   <p className="text-emerald-200 italic text-center font-cormorant text-lg mt-2">
                     📸 {status.success}
@@ -186,22 +200,31 @@ function BonCadeau() {
                     🤯 {status.error}
                   </p>
                 )}
+
+
+                <div className="flex justify-center pt-2">
+                  <Turnstile
+                    sitekey={import.meta.env.VITE_TURNSTILE_SITEKEY}
+                    onVerify={(token) => setCaptchaToken(token)}
+                    onExpire={() => setCaptchaToken(null)}
+                    onError={() => setCaptchaToken(null)}
+                  />
+                </div>
+
+                {/* BTN */}
+                <div className="flex justify-center pt-4">
+                  <button
+                    type="submit"
+                    disabled={status.loading}
+                    className="bg-hazel-light text-hazel-rust font-cormorant text-xl sm:text-2xl px-10 py-2.5 rounded-xl shadow-md tracking-wider transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                  >
+                    {status.loading ? "Création..." : "Créer mon bon cadeau"}
+                  </button>
+                </div>
               </form>
             </div>
 
-            {/* BTN */}
-            <div className="flex justify-center mt-6">
-              <button
-                onClick={handleSubmit}
-                type="submit"
-                disabled={status.loading}
-                className="bg-hazel-rust hover:bg-[#6A261B] text-white font-cormorant text-xl sm:text-2xl px-10 py-2.5 rounded-xl shadow-md tracking-wider transition-all duration-300 disabled:opacity-50 cursor-pointer"
-              >
-                {status.loading ? "Création..." : "Créer mon bon cadeau"}
-              </button>
-            </div>
-
-            <p className=" italic font-bold text-center text-hazel-rust mt-4 font-cormorant tracking-wide">
+            <p className="italic font-bold text-center text-hazel-rust mt-4 font-cormorant tracking-wide">
               Je vous réponds sous 24 à 48h afin de créer ensemble un bon cadeau qui vous ressemble.
             </p>
           </div>

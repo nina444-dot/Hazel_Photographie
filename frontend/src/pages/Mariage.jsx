@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/axios";
+import { Turnstile } from "react-turnstile";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import mariage1 from "../assets/mariage1.webp";
@@ -25,8 +26,9 @@ const Mariage = () => {
   });
 
   const [status, setStatus] = useState({ loading: false, success: null, error: null });
+  const [captchaToken, setCaptchaToken] = useState(null);
 
-  // Gestion scrollbar
+
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
@@ -43,11 +45,24 @@ const Mariage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      setStatus({ 
+        loading: false, 
+        success: null, 
+        error: "Veuillez valider le CAPTCHA." 
+      });
+      return;
+    }
+
     setStatus({ loading: true, success: null, error: null });
 
     try {
-      const response = await axios.post("http://localhost:5000/api/mariage", formData);
-      setStatus({ loading: false, success: response.data.message, error: null });
+      
+      const res = await api.post("/mariage", { ...formData, captchaToken });
+
+      setStatus({ loading: false, success: res.data.message, error: null });
+      
       setFormData({
         prenomFutureConjointe: "",
         dateMariage: "",
@@ -59,11 +74,13 @@ const Mariage = () => {
         projetMessage: "",
         budget: ""
       });
+      setCaptchaToken(null);
+
     } catch (err) {
       setStatus({
         loading: false,
         success: null,
-        error: err.response?.data?.message || "Une erreur est survenue lors de l'envoi."
+        error: err.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
       });
     }
   };
@@ -85,7 +102,7 @@ const Mariage = () => {
         </div>
       </section>
 
-      {/* SECTION MON APPROCHE */}
+      {/* MON APPROCHE */}
       <section className="max-w-4xl mx-auto px-6 py-24 text-center space-y-8">
         <h2 className="text-4xl md:text-5xl tracking-widest uppercase font-semibold text-hazel-brown">
           MON APPROCHE
@@ -114,7 +131,7 @@ const Mariage = () => {
         <div className="aspect-[3/4] bg-cover bg-center rounded-sm shadow-sm" style={{ backgroundImage: `url(${mariage4})` }}></div>
       </section>
 
-      {/* SECTION MES FORMULES */}
+      {/* MES FORMULES */}
       <section className="py-24 bg-transparent w-full">
         <div className="max-w-6xl mx-auto px-6">
           
@@ -129,136 +146,139 @@ const Mariage = () => {
             </h2>
           </div>
           
-          {/* Grille des formules */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto items-stretch">
-            
+          {/* GRILLE FORMULES*/}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto items-stretch">
+  
+  {/* Formule 1 */}
+  <div className="bg-hazel-rust p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
+    <div className="space-y-6">
+      <h3 className="text-3xl font-bold italic tracking-wide text-hazel-light">
+        Premiers Chapitres
+      </h3>
+      <p className="text-lg leading-relaxed font-bold text-white">
+        Une formule pensée pour capturer l'essentiel : la cérémonie, les émotions, les premiers souvenirs de votre mariage.
+      </p>
+      <p className="text-lg font-bold text-white">
+        Je privilégie toujours l'authenticité : pas de poses forcées, simplement vous, vos proches, et ce qui se vit sur l'instant.
+      </p>
+    </div>
 
-            <div className="bg-hazel-rust p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold italic tracking-wide text-hazel-light">
-                  Premiers Chapitres
-                </h3>
-                <p className="text-lg leading-relaxed font-bold text-white">
-                  Une formule pensée pour capturer l'essentiel : la cérémonie, les émotions, les premiers souvenirs de votre mariage.
-                </p>
-                <p className="text-lg font-bold text-white">
-                  Je privilégie toujours l'authenticité : pas de poses forcées, simplement vous, vos proches, et ce qui se vit sur l'instant.
-                </p>
-              </div>
+    <div className="mt-8 space-y-6">
+      <div className="pt-4">
+        <p className="text-lg font-bold tracking-widest uppercase text-hazel-light italic mb-3">INCLUS :</p>
+        <ul className="text-lg space-y-2 font-bold text-white">
+          <li>• 4h de reportage photo</li>
+          <li>• Galerie privée en ligne</li>
+          <li>• Images retouchées avec soin</li>
+          <li>• Téléchargement HD</li>
+        </ul>
+      </div>
+      <div className="pt-4">
+        <span className="border border-hazel-light/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-hazel-rust text-hazel-light">
+          800 €
+        </span>
+      </div>
+    </div>
+  </div>
 
-              <div className="mt-8 space-y-6">
-                <div className="pt-4">
-                  <p className="text-lg font-bold tracking-widest uppercase text-hazel-light italic mb-3">INCLUS :</p>
-                  <ul className="text-lg space-y-2 font-bold text-white">
-                    <li>• 4h de reportage photo</li>
-                    <li>• Galerie privée en ligne</li>
-                    <li>• Images retouchées avec soin</li>
-                    <li>• Téléchargement HD</li>
-                  </ul>
-                </div>
-                <div className="pt-4">
-                  <span className="border border-hazel-light/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-hazel-rust text-hazel-light">
-                    800 €
-                  </span>
-                </div>
-              </div>
-            </div>
+  {/* Formule 2*/}
+  <div className="bg-[#B6856B] p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
+    <div className="space-y-6">
+      <h3 className="text-3xl font-bold italic tracking-wide text-hazel-rust">
+        Le Film
+      </h3>
+      <p className="text-lg leading-relaxed font-bold text-white">
+        Votre journée comme un film que l'on aime revoir. Des préparatifs à la lumière du soir, je capture l'atmosphère, les silences, les éclats de rire et les regards qui racontent vraiment votre histoire.
+      </p>
+      <p className="text-lg font-bold text-white">
+        Une collection pensée pour garder l'émotion intacte, année après année.
+      </p>
+    </div>
 
-            <div className="bg-[#B6856B] p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold italic tracking-wide text-hazel-rust">
-                  Le Film
-                </h3>
-                <p className="text-lg leading-relaxed font-bold text-white">
-                  Votre journée comme un film que l'on aime revoir. Des préparatifs à la lumière du soir, je capture l'atmosphère, les silences, les éclats de rire et les regards qui racontent vraiment votre histoire.
-                </p>
-                <p className="text-lg font-bold text-white">
-                  Une collection pensée pour garder l'émotion intacte, année après année.
-                </p>
-              </div>
+    <div className="mt-8 space-y-6">
+      <div className="pt-4">
+        <p className="text-lg font-bold tracking-widest uppercase text-hazel-rust italic mb-3">INCLUS :</p>
+        <ul className="text-lg space-y-2 font-bold text-white">
+          <li>• 8h de reportage photo</li>
+          <li>• Préparatifs jusqu'aux moments clés</li>
+          <li>• Galerie privée HD</li>
+          <li>• Images soigneusement retouchées</li>
+          <li>• Séance engagement en option</li>
+        </ul>
+      </div>
+      <div className="pt-4">
+        <span className="border border-hazel-rust/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-[#B6856B] text-hazel-rust">
+          1350 €
+        </span>
+      </div>
+    </div>
+  </div>
 
-              <div className="mt-8 space-y-6">
-                <div className="pt-4">
-                  <p className="text-lg font-bold tracking-widest uppercase text-hazel-rust italic mb-3">INCLUS :</p>
-                  <ul className="text-lg space-y-2 font-bold text-white">
-                    <li>• 8h de reportage photo</li>
-                    <li>• Préparatifs jusqu'aux moments clés</li>
-                    <li>• Galerie privée HD</li>
-                    <li>• Images soigneusement retouchées</li>
-                    <li>• Séance engagement en option</li>
-                  </ul>
-                </div>
-                <div className="pt-4">
-                  <span className="border border-hazel-rust/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-[#B6856B] text-hazel-rust">
-                    1350 €
-                  </span>
-                </div>
-              </div>
-            </div>
+  {/* Formule 3 */}
+  <div className="bg-hazel-rust md:bg-[#B6856B] p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
+    <div className="space-y-6">
+      <h3 className="text-3xl font-bold italic tracking-wide text-hazel-light md:text-hazel-rust">
+        Mémoire Vive
+      </h3>
+      <p className="text-lg leading-relaxed font-bold text-white">
+        Une présence étendue pour raconter votre journée dans toute son intensité. Des premiers frissons du matin jusqu'à l'énergie de la soirée, je capture l'histoire dans son intégralité.
+      </p>
+      <p className="text-lg font-bold text-white">
+        Vous repartez également avec un album fine art, pensé comme un objet précieux, à transmettre et feuilleter au fil des années.
+      </p>
+    </div>
 
-            <div className="bg-[#B6856B] p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold italic tracking-wide text-hazel-rust">
-                  Mémoire Vive
-                </h3>
-                <p className="text-lg leading-relaxed font-bold text-white">
-                  Une présence étendue pour raconter votre journée dans toute son intensité. Des premiers frissons du matin jusqu'à l'énergie de la soirée, je capture l'histoire dans son intégralité.
-                </p>
-                <p className="text-lg font-bold text-white">
-                  Vous repartez également avec un album fine art, pensé comme un objet précieux, à transmettre et feuilleter au fil des années.
-                </p>
-              </div>
+    <div className="mt-8 space-y-6">
+      <div className="pt-4">
+        <p className="text-lg font-bold tracking-widest uppercase text-hazel-light md:text-hazel-rust italic mb-3">INCLUS :</p>
+        <ul className="text-lg space-y-2 font-bold text-white">
+          <li>• Journée complète de reportage</li>
+          <li>• Galerie privée HD</li>
+          <li>• Album fine art inclus</li>
+          <li>• Accompagnement avant le mariage</li>
+          <li>• Séance engagement</li>
+        </ul>
+      </div>
+      <div className="pt-4">
+        <span className="border border-hazel-light/30 md:border-hazel-rust/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-hazel-rust md:bg-[#B6856B] text-hazel-light md:text-hazel-rust">
+          1800 €
+        </span>
+      </div>
+    </div>
+  </div>
 
-              <div className="mt-8 space-y-6">
-                <div className="pt-4">
-                  <p className="text-lg font-bold tracking-widest uppercase text-hazel-rust italic mb-3">INCLUS :</p>
-                  <ul className="text-lg space-y-2 font-bold text-white">
-                    <li>• Journée complète de reportage</li>
-                    <li>• Galerie privée HD</li>
-                    <li>• Album fine art inclus</li>
-                    <li>• Accompagnement avant le mariage</li>
-                    <li>• Séance engagement</li>
-                  </ul>
-                </div>
-                <div className="pt-4">
-                  <span className="border border-hazel-rust/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-[#B6856B] text-hazel-rust">
-                    1800 €
-                  </span>
-                </div>
-              </div>
-            </div>
+  {/* Formule 4 */}
+  <div className="bg-[#B6856B] md:bg-hazel-rust p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
+    <div className="space-y-6">
+      <h3 className="text-3xl font-bold italic tracking-wide text-hazel-rust md:text-hazel-light">
+        La Promesse
+      </h3>
+      <p className="text-lg leading-relaxed font-bold text-white">
+        Une séance à deux, simple et naturelle. Que ce soit pour un PACS, une demande particulière ou simplement pour garder une trace de votre amour, je privilégie toujours les vrais moments.
+      </p>
+      <p className="text-lg font-bold text-white">
+        Pas besoin de savoir poser : Je vous guide doucement, tout en laissant place à votre spontanéité.
+      </p>
+    </div>
 
-            <div className="bg-hazel-rust p-10 rounded-2xl shadow-sm flex flex-col justify-between text-center min-h-[660px]">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold italic tracking-wide text-hazel-light">
-                  La Promesse
-                </h3>
-                <p className="text-lg leading-relaxed font-bold text-white">
-                  Une séance à deux, simple et naturelle. Que ce soit pour un PACS, une demande particulière ou simplement pour garder une trace de votre amour, je privilégie toujours les vrais moments.
-                </p>
-                <p className="text-lg font-bold text-white">
-                  Pas besoin de savoir poser : Je vous guide doucement, tout en laissant place à votre spontanéité.
-                </p>
-              </div>
+    <div className="mt-8 space-y-6">
+      <div className="pt-4">
+        <p className="text-lg font-bold tracking-widest uppercase text-hazel-rust md:text-hazel-light italic mb-3">INCLUS :</p>
+        <ul className="text-lg space-y-2 font-bold text-white">
+          <li>• Environ 2h de séance</li>
+          <li>• Galerie privée en ligne</li>
+          <li>• Images retouchées HD</li>
+        </ul>
+      </div>
+      <div className="pt-4">
+        <span className="border border-hazel-rust/30 md:border-hazel-light/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-[#B6856B] md:bg-hazel-rust text-hazel-rust md:text-hazel-light">
+          350 €
+        </span>
+      </div>
+    </div>
+  </div>
 
-              <div className="mt-8 space-y-6">
-                <div className="pt-4">
-                  <p className="text-lg font-bold tracking-widest uppercase text-hazel-light italic mb-3">INCLUS :</p>
-                  <ul className="text-lg space-y-2 font-bold text-white">
-                    <li>• Environ 2h de séance</li>
-                    <li>• Galerie privée en ligne</li>
-                    <li>• Images retouchées HD</li>
-                  </ul>
-                </div>
-                <div className="pt-4">
-                  <span className="border border-hazel-light/30 px-8 py-2 rounded-xl inline-block text-xl tracking-wide font-bold bg-hazel-rust text-hazel-light">
-                    350 €
-                  </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+</div>
 
           <div className="mt-20 text-center text-xl italic max-w-2xl mx-auto space-y-4 text-hazel-rust/85 font-bold leading-relaxed">
             <p>Un acompte de 40% permet de réserver la date. Le solde est à régler avant le mariage.</p>
@@ -340,11 +360,21 @@ const Mariage = () => {
             <input type="text" name="budget" value={formData.budget} onChange={handleChange} className="w-full p-2 bg-transparent border-b border-hazel-rust/60 focus:border-hazel-rust outline-none transition text-lg" />
           </div>
 
-          {status.success && <div className="text-center text-hazel-rust text-lg font-medium py-2">{status.success}</div>}
+          {status.success && <div className="text-center text-emerald-700 text-lg font-medium py-2">{status.success}</div>}
           {status.error && <div className="text-center text-hazel-rust text-lg font-medium py-2">{status.error}</div>}
 
+          {/* Intégration de Turnstile */}
+          <div className="flex justify-center pt-2">
+            <Turnstile
+              sitekey={import.meta.env.VITE_TURNSTILE_SITEKEY}
+              onVerify={(token) => setCaptchaToken(token)}
+              onExpire={() => setCaptchaToken(null)}
+              onError={() => setCaptchaToken(null)}
+            />
+          </div>
+
           <div className="text-center pt-4">
-            <button type="submit" disabled={status.loading} className="bg-hazel-rust text-hazel-light text-base uppercase tracking-widest font-medium px-12 py-3.5 rounded-full shadow-md hover:bg-hazel-rust/95 transition active:scale-95 disabled:opacity-50">
+            <button type="submit" disabled={status.loading} className="bg-hazel-rust text-hazel-light text-base uppercase tracking-widest font-medium px-12 py-3.5 rounded-full shadow-md transition active:scale-95 disabled:opacity-50">
               {status.loading ? "Envoi en cours..." : "Envoyer ma demande"}
             </button>
           </div>
@@ -366,7 +396,7 @@ const Mariage = () => {
                 />
               </div>
               <p className="text-2xl md:text-3xl italic font-light leading-relaxed">
-                "Si vous aimez les images naturelles, les ambiances douces et les souvenirs qui ressemblent à ce que vous avez vécus... alors nous sommes probablement faits pour travailler ensemble."
+                Si vous aimez les images naturelles, les ambiances douces et les souvenirs qui ressemblent à ce que vous avez vécus... alors nous sommes probablement faits pour travailler ensemble.
               </p>
             </div>
 
