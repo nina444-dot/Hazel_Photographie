@@ -15,6 +15,7 @@ import photoGrossesse from '../assets/seance-grossesse.webp';
 import photoMariage from '../assets/seance-mariage.webp';
 import photoCouple from '../assets/seance-couple.webp';
 import photoFemme from '../assets/seance-femme.webp';
+import photoNaissance from '../assets/seance-naissance.webp';
 import mini1 from '../assets/mini1.webp';
 import mini2 from '../assets/mini2.webp';
 import mini3 from '../assets/mini3.webp';
@@ -111,7 +112,7 @@ const Accueil = () => {
               { nom: "Mariage", img: photoMariage },
               { nom: "Couple", img: photoCouple },
               { nom: "Femme", img: photoFemme },
-              { nom: "Nouveau né", img: photoFamille }
+              { nom: "Nouveau né", img: photoNaissance }
             ].map((seance, index) => (
               <div key={index} className="flex flex-col items-center relative">
                 
