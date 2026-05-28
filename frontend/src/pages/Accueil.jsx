@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TarifsModal from '../components/TarifsModale';
 import Navbar from '../components/Navbar'; 
 import Footer from '../components/Footer';
@@ -23,6 +24,7 @@ import mini6 from '../assets/mini6.webp';
 import mini7 from '../assets/mini7.webp';
 
 const Accueil = () => {
+  const navigate = useNavigate();
   const scrollRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTitre, setSelectedTitre] = useState("");
@@ -121,6 +123,7 @@ const Accueil = () => {
                 <button 
                   onClick={() => {
                     if (seance.nom === "Mariage") {
+                      navigate("/mariage");
                       console.log("Page Mariage");
                     } else {
                       setSelectedTitre(seance.nom); 

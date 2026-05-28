@@ -60,7 +60,7 @@ const Navbar = ({ transparent }) => {
 
       {/* MENU DESKTOP */}
       <ul className="hidden md:flex flex-grow justify-center items-center gap-10 lg:gap-20 text-xl lg:text-2xl tracking-[0.15em]">
-        <li className="hover:text-hazel-btn transition"><Link to="/mariages">Mariages</Link></li>
+        <li className="hover:text-hazel-btn transition"><Link to="/mariage">Mariages</Link></li>
         
         <li className="hover:text-hazel-btn transition">
           <a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a>
