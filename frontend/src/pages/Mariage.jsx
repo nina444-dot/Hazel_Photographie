@@ -294,7 +294,7 @@ const Mariage = () => {
       {/* FORMULAIRE */}
       <section className="max-w-2xl mx-auto px-6 py-24">
         <h2 className="text-3xl md:text-4xl tracking-widest uppercase font-bold text-center mb-12 text-hazel-rust">
-          Racontez-moi tout !
+          Racontez-moi tout&nbsp;!
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-8 text-hazel-rust">
