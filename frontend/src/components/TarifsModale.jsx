@@ -120,7 +120,7 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
             <Link 
               to="/contact"
               onClick={onClose} 
-              className="bg-hazel-rust text-white text-center px-12 py-2.5 rounded-[15px] text-sm md:text-base hover:bg-opacity-90 shadow-md tracking-widest transition-all inline-block"
+              className="bg-hazel-rust text-white text-center px-12 py-2.5 rounded-[15px] text-sm md:text-base shadow-md tracking-widest transition-all inline-block"
             >
               Me contacter
             </Link>
