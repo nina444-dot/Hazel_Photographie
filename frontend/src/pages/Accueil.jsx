@@ -45,33 +45,36 @@ const Accueil = () => {
 
       <div className="flex flex-col w-full bg-hazel-light font-cormorant overflow-x-hidden">
         
-        {/* SECTION LOGO */}
-        <section 
-          id="accueil" 
-          className="min-h-screen relative flex items-center justify-center"
-          style={{ 
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(${photoHome})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
-          {/* Balise H1 SEO ("sr-only" pour cacher) */}
-          <h1 className="sr-only">Hazel Photographie - Photographe de mariage et instants de vie à Pau</h1>
+  
+  {/* SECTION LOGO */}
+    <section 
+    id="accueil" 
+     className="min-h-screen relative flex items-center justify-center overflow-hidden">
+  
+  <img 
+    src={photoHome} 
+    alt="Arrière-plan Hazel Photographie" 
+    fetchPriority="high"
+    className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+    style={{ filter: "brightness(0.70)" }}
+  />
 
-          <div className="relative z-10 flex flex-col items-center">
-            <img 
-              src={logo} 
-              alt="Captat Hazel Logo" 
-              className="w-64 md:w-[450px] object-contain" 
-            />
-            <img 
-              src={flecheBas} 
-              alt="Fleche Bas" 
-              className="w-8 md:w-[50px] object-contain mt-[20vh] md:mt-10 animate-bounce" 
-            />
-          </div>         
-        </section>
+  {/* Balise H1 SEO ("sr-only" pour cacher) */}
+  <h1 className="sr-only">Hazel Photographie - Photographe de mariage et instants de vie à Pau</h1>
+
+  <div className="relative z-10 flex flex-col items-center">
+    <img 
+      src={logo} 
+      alt="Captat Hazel Logo" 
+      className="w-64 md:w-[450px] object-contain" 
+    />
+    <img 
+      src={flecheBas} 
+      alt="Fleche Bas" 
+      className="w-8 md:w-[50px] object-contain mt-[20vh] md:mt-10 animate-bounce" 
+    />
+  </div>        
+</section>
 
         {/* SECTION INTRO */}
         <section className="py-20 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">

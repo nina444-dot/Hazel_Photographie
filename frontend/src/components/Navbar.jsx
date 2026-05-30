@@ -100,7 +100,7 @@ const Navbar = ({ transparent }) => {
       `}>
         <div className="absolute inset-0 bg-hazel-rust/60 backdrop-blur-2xl" />
         <ul className="relative h-full flex flex-col items-center justify-center gap-10 text-3xl tracking-[0.2em] text-white italic">
-          <li onClick={closeMenu}><Link to="/mariages">Mariages</Link></li>
+          <li onClick={closeMenu}><Link to="/mariage">Mariages</Link></li>
           
           
           <li><a href="#seances" onClick={(e) => handleHashLink(e, 'seances')}>Les Séances</a></li>

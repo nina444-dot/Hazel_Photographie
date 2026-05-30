@@ -69,25 +69,26 @@ function BonCadeau() {
       <div className="flex-grow flex flex-col md:flex-row">
         
         {/* IMG */}
-        <div className="w-full md:w-1/2 relative min-h-[300px] h-[320px] sm:h-[400px] md:h-auto flex justify-center text-center">
-          <img 
-            src={imageCouple} 
-            alt="Moment de complicité capturé par Hazel Photographie" 
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          
-          <div className="absolute inset-0 bg-black/35 backdrop-blur-[0.5px]" />
-          
-          {/* TITRES */}
-          <div className="absolute top-8 left-4 right-4 z-10 max-w-md mx-auto drop-shadow-lg md:top-1/4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl tracking-wide font-normal font-cormorant text-hazel-light uppercase">
-              Bon Cadeau
-            </h1>
-            <p className="text-base sm:text-lg md:text-1xl uppercase font-bold tracking-wider mt-2 text-hazel-light">
-              Des souvenirs inoubliables à offrir !
-            </p>
-          </div>
-        </div>
+<div className="w-full md:w-1/2 relative min-h-[300px] h-[320px] sm:h-[400px] md:h-auto flex justify-center text-center">
+  <img 
+    src={imageCouple} 
+    alt="Moment de complicité capturé par Hazel Photographie" 
+    className="absolute inset-0 w-full h-full object-cover object-center"
+    fetchPriority="high"   
+  />
+  
+  <div className="absolute inset-0 bg-black/35 backdrop-blur-[0.5px]" />
+  
+  {/* TITRES */}
+  <div className="absolute top-8 left-4 right-4 z-10 max-w-md mx-auto drop-shadow-lg md:top-1/4">
+    <h1 className="text-4xl sm:text-5xl md:text-6xl tracking-wide font-normal font-cormorant text-hazel-light uppercase">
+      Bon Cadeau
+    </h1>
+    <p className="text-base sm:text-lg md:text-1xl uppercase font-bold tracking-wider mt-2 text-hazel-light">
+      Des souvenirs inoubliables à offrir !
+    </p>
+  </div>
+</div>
 
         {/* ZONE TEXTE ET FORMULAIRE */}
         <div className="w-full md:w-1/2 flex items-center justify-center px-6 sm:px-12 py-12">
