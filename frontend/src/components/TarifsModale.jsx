@@ -4,6 +4,53 @@ import api from "../api/axios";
 import fleurMarron from '../assets/fleur-marron.png';
 import flecheGauche from '../assets/fleche-gauche.png';
 import flecheDroite from '../assets/fleche-droite.png';
+import modaleFamille1 from '../assets/modale-famille1.webp';
+import modaleFamille2 from '../assets/modale-famille2.webp';
+import modaleFamille3 from '../assets/modale-famille3.webp';
+import modaleFamille4 from '../assets/modale-famille4.webp';
+import modaleFamille5 from '../assets/modale-famille5.webp';
+import modaleFamille6 from '../assets/modale-famille6.webp';
+import modaleFamille7 from '../assets/modale-famille7.webp';
+import modaleGrossesse1 from '../assets/modale-grossesse1.webp';
+import modaleGrossesse2 from '../assets/modale-grossesse2.webp';
+import modaleGrossesse3 from '../assets/modale-grossesse3.webp';
+import modaleGrossesse4 from '../assets/modale-grossesse4.webp';
+import modaleGrossesse5 from '../assets/modale-grossesse5.webp';
+import modaleGrossesse6 from '../assets/modale-grossesse6.webp';
+import modaleGrossesse7 from '../assets/modale-grossesse7.webp';
+import modaleCouple1 from '../assets/modale-couple1.webp';
+import modaleCouple2 from '../assets/modale-couple2.webp';
+import modaleCouple3 from '../assets/modale-couple3.webp';
+import modaleCouple4 from '../assets/modale-couple4.webp';
+import modaleCouple5 from '../assets/modale-couple5.webp';
+import modaleCouple6 from '../assets/modale-couple6.webp';
+import modaleCouple7 from '../assets/modale-couple7.webp';
+import modaleFemme1 from '../assets/modale-femme1.webp';
+import modaleFemme2 from '../assets/modale-femme2.webp';
+import modaleFemme3 from '../assets/modale-femme3.webp';
+import modaleFemme4 from '../assets/modale-femme4.webp';
+import modaleFemme5 from '../assets/modale-femme5.webp';
+import modaleFemme6 from '../assets/modale-femme6.webp';
+import modaleFemme7 from '../assets/modale-femme7.webp';
+
+const GALERIES_PAR_CATEGORIE = {
+  "Famille": [
+    modaleFamille1, modaleFamille2, modaleFamille3, modaleFamille4, 
+    modaleFamille5, modaleFamille6, modaleFamille7
+  ],
+  "Grossesse": [
+    modaleGrossesse1, modaleGrossesse2, modaleGrossesse3, modaleGrossesse4, 
+    modaleGrossesse5, modaleGrossesse6, modaleGrossesse7
+  ],
+  "Couple": [
+    modaleCouple1, modaleCouple2, modaleCouple3, modaleCouple4, 
+    modaleCouple5, modaleCouple6, modaleCouple7
+  ],
+  "Femme": [
+    modaleFemme1, modaleFemme2, modaleFemme3, modaleFemme4, 
+    modaleFemme5, modaleFemme6, modaleFemme7
+  ],
+};
 
 const TarifsModale = ({ isOpen, onClose, titre }) => {
   const [formules, setFormules] = useState([]);
@@ -34,6 +81,8 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
       });
     }
   };
+
+  const imagesGalerie = GALERIES_PAR_CATEGORIE[titre] || [];
 
   if (!isOpen) return null;
 
@@ -133,14 +182,15 @@ const TarifsModale = ({ isOpen, onClose, titre }) => {
             </button>
             
             <div 
-              ref={modalScrollRef} 
-              className="flex flex-nowrap gap-4 overflow-x-auto no-scrollbar scroll-smooth h-full items-center max-w-full"
-            >
-              {[1, 2, 3, 4, 5, 6, 7].map((img) => (
-                <div key={img} className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] bg-gray-200 shadow-sm shrink-0 rounded-sm border border-white">
-                </div>
-              ))}
-            </div>
+  ref={modalScrollRef} 
+  className="flex flex-nowrap gap-4 overflow-x-auto no-scrollbar scroll-smooth h-full items-center max-w-full"
+>
+  {imagesGalerie.map((imgSrc, index) => (
+    <div key={index} className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] shadow-sm shrink-0 rounded-sm border border-white overflow-hidden">
+      <img src={imgSrc} alt={`Miniature ${index + 1}`} className="w-full h-full object-cover" />
+    </div>
+  ))}
+</div>
 
             <button onClick={() => scrollModal('right')} className="shrink-0 hover:scale-110 transition p-2">
               <img src={flecheDroite} alt="Suivant" className="w-4 select-none" />
