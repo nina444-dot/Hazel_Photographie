@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext'; 
 import BonCadeau from './pages/BonCadeau';
 import Mariage from "./pages/Mariage";
+import MentionsLegales from './pages/MentionsLegales';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/bon-cadeau" element={<BonCadeau />} />
             <Route path="/mariage" element={<Mariage />} />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
     
             <Route 
               path="/admin/dashboard" 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // ◄ Ne pas oublier d'importer Link
 import logo from '../assets/logo.png';
 import instagramIcon from '../assets/instagram.png';
 import locIcon from '../assets/localisation.png';
@@ -52,11 +53,20 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* COPYRIGHT */}
-      <div className="bg-hazel-rust w-full py-3 border-t border-white/10">
-        <p className="text-center italic text-xs md:text-sm text-hazel-light opacity-60 tracking-widest px-4">
-          @2026 captathazel tous droits réservés | créé par dominguez nina
-        </p>
+      {/* COPYRIGHT & MENTIONS LÉGALES */}
+      <div className="bg-hazel-rust w-full py-4 border-t border-white/10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 text-center italic text-xs md:text-sm text-hazel-light tracking-widest px-4">
+          <p className="opacity-60">
+            @2026 captathazel tous droits réservés | créé par dominguez nina
+          </p>
+          <span className="hidden sm:inline opacity-60">|</span>
+          <Link 
+            to="/mentions-legales" 
+            className="hover:text-hazel-btn transition opacity-60 hover:opacity-90"
+          >
+            Mentions Légales
+          </Link>
+        </div>
       </div>
 
     </footer>
