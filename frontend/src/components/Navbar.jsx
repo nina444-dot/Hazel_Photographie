@@ -83,18 +83,23 @@ const Navbar = ({ transparent }) => {
           </Link>
         </div>
 
-        <button 
-          onClick={toggleMenu}
-          className="flex flex-col justify-center items-center md:hidden w-11 h-11 gap-1.5 focus:outline-none"
-        >
-          <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-          <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-          <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-        </button>
+  <button 
+    onClick={toggleMenu}
+    className="flex flex-col justify-center items-center md:hidden w-11 h-11 gap-1.5 focus:outline-none"
+    aria-label={isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
+    aria-expanded={isOpen}
+    aria-controls="mobile-navigation-menu"
+  >
+    <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+    <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+    <span className={`block w-5 h-0.5 bg-hazel-light transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+  </button>
       </div>
 
       {/* MENU MOBILE */}
-      <div className={`
+      <div 
+      id="mobile-navigation-menu"
+      className={`
         fixed inset-0 z-[110] md:hidden transition-all duration-500 ease-in-out
         ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
       `}>
