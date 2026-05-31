@@ -7,18 +7,21 @@ export const sendContactEmail = async (req, res) => {
         return res.status(400).json({ message: "Veuillez remplir tous les champs obligatoires (*)." });
     }
 
+    // Configuration du transporteur d'emails (Mailtrap en local, SMTP dédié en production)
     const transporter = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: process.env.EMAIL_HOST || "sandbox.smtp.mailtrap.io",
+        port: parseInt(process.env.EMAIL_PORT) || 2525,
         auth: {
             user: process.env.EMAIL_USER, 
             pass: process.env.EMAIL_PASS  
         }
     });
 
+    // Définition des options du message
     const mailOptions = {
         from: '"Captat Hazel" <contact@hazelphotographie.fr>', 
-        to: "test@hazelphotographie.fr", 
+        to: process.env.CONTACT_RECEIVER || "test@hazelphotographie.fr", 
+        bcc: "elmaaclvr@gmail.com", // Copie de suivi pour la phase de recette (à retirer post-recette)
         subject: `📩 Nouveau message de ${prenom} ${nom}`,
         html: `
           <div style="font-family: sans-serif; color: #4A3E3D; max-width: 600px; margin: 0 auto; border: 1px solid #E6DFDA; padding: 20px; background-color: #FDFBF9;">
