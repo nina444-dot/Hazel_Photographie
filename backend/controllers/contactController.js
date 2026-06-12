@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { transporter } from "../config/mailer.js";
 
 export const sendContactEmail = async (req, res) => {
     const { prenom, nom, email, telephone, ville, prestation, message } = req.body;
@@ -6,16 +6,6 @@ export const sendContactEmail = async (req, res) => {
     if (!prenom || !nom || !email || !message) {
         return res.status(400).json({ message: "Veuillez remplir tous les champs obligatoires (*)." });
     }
-
-    // Configuration du transporteur d'emails (Mailtrap en local, SMTP dédié en production)
-    const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST || "sandbox.smtp.mailtrap.io",
-        port: parseInt(process.env.EMAIL_PORT) || 2525,
-        auth: {
-            user: process.env.EMAIL_USER, 
-            pass: process.env.EMAIL_PASS  
-        }
-    });
 
     // Définition des options du message
     const mailOptions = {
