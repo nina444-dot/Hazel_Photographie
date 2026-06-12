@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { transporter } from "../config/mailer.js";
 
 export const sendMariageDemande = async (req, res) => {
     const { 
@@ -16,15 +16,6 @@ export const sendMariageDemande = async (req, res) => {
     if (!prenomFutureConjointe || !dateMariage || !lieuCeremonie || !lieuReception || !villeDepartement || !projetMessage) {
         return res.status(400).json({ message: "Veuillez remplir tous les champs obligatoires (*)." });
     }
-
-    const transporter = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-            user: process.env.EMAIL_USER, 
-            pass: process.env.EMAIL_PASS  
-        }
-    });
 
     
     const mailOptions = {

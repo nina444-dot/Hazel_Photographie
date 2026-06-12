@@ -8,7 +8,7 @@ export const validateCaptcha = async (req, res, next) => {
   }
 
   try {
-    // Formatage des données en URL-encoded requis par l'API Cloudflare
+  
     const params = new URLSearchParams();
     params.append('secret', process.env.TURNSTILE_SECRET_KEY);
     params.append('response', captchaToken);
@@ -27,7 +27,7 @@ export const validateCaptcha = async (req, res, next) => {
     if (response.data && response.data.success) {
       next(); 
     } else {
-      return res.status(400).json({ message: "Sécurité : Échec de la vérification (Robot détecté)." });
+      return res.status(400).json({ message: "Échec de la vérification Robot détecté." });
     }
   } catch (error) {
     console.error("Erreur Turnstile:", error);
